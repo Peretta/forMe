@@ -1,0 +1,218 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    background-color: #f5f5f5;
+    color: #333;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+/* Adicionar Tarefa */
+.add_task {
+    background-color: #ffffff;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap; /* Ajusta inputs e botão para telas menores */
+}
+
+.add_task input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    flex: 1;
+    min-width: 200px;
+}
+
+.add_task button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.add_task button:hover {
+    background-color: #45a049;
+}
+
+/* Timeline */
+.show_task {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column; /* Alinha tasks verticalmente */
+    gap: 20px;
+    overflow-y: auto; /* Scroll vertical para ver todas as tasks */
+    overflow-x:hidden;
+    max-height: 500px; /* Altura máxima do container */
+    scroll-behavior: smooth;
+}
+
+.show_task::-webkit-scrollbar {
+    width: 8px;
+}
+
+.show_task::-webkit-scrollbar-thumb {
+    background-color: #4CAF50;
+    border-radius: 10px;
+}
+
+.show_task::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+/* Cada Task */
+.part_task {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-x: auto; /* Scroll horizontal para cada task */
+    overflow-y: hidden;
+    width: 100%;
+}
+
+.part_task::-webkit-scrollbar {
+    height: 6px; /* Scroll horizontal para cada task */
+}
+
+.part_task::-webkit-scrollbar-thumb {
+    background-color: #4CAF50;
+    border-radius: 10px;
+}
+
+.part_task::-webkit-scrollbar-track {
+    background-color: #f0f0f0;
+}
+
+.task_name {
+    font-weight: bold;
+    color: #4CAF50;
+    margin-bottom: 5px;
+    text-align: left;
+    width: 100%;
+}
+
+.steps_container {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    width: fit-content;
+}
+
+.step_task {
+    background-color: transparent;
+    height: 16px;
+    width: 16px;
+    border: 3px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    position: relative;
+}
+
+.step_task.active {
+    background-color: #4CAF50;
+    border-color: #4CAF50;
+}
+
+.step_task span {
+    font-size: 12px;
+    color: #aaa; /* Número discreto */
+    pointer-events: none;
+}
+
+.line_task {
+    background-color: #ccc;
+    height: 4px;
+    width: 50px;
+    flex-shrink: 0;
+}
+
+/* Confetes */
+.confetti {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #FFD700;
+    animation: fall 1.5s ease-out forwards;
+    border-radius: 50%;
+    z-index: 10;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(calc(-50px + 100px * var(--random-y)))
+                    translateX(calc(-30px + 60px * var(--random-x)));
+        opacity: 0;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .add_task {
+        flex-direction: column; /* Ajusta para uma coluna */
+        align-items: stretch;
+    }
+
+    .add_task input,
+    .add_task button {
+        width: 100%; /* Ocupa toda a largura do container */
+    }
+
+    .step_task {
+        height: 14px;
+        width: 14px;
+        border-width: 2px;
+    }
+
+    .line_task {
+        width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .add_task input {
+        min-width: unset; /* Remove largura mínima */
+    }
+
+    .step_task {
+        height: 12px;
+        width: 12px;
+        border-width: 2px;
+    }
+
+    .line_task {
+        width: 30px;
+    }
+
+    .task_name {
+        font-size: 14px;
+    }
+}
